@@ -1,5 +1,8 @@
 package com.pet.moneyconvertor
 
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
 import org.junit.Test
 
 import org.junit.Assert.*
@@ -11,7 +14,26 @@ import org.junit.Assert.*
  */
 class ExampleUnitTest {
     @Test
-    fun addition_isCorrect() {
-        assertEquals(4, 2 + 2)
+    fun addition_isCorrect() = runBlocking {
+
+        val valCur = getValCurs()
+        assertNotNull(valCur)
+
+//        val list = getCurrencies()
+////        assertNotNull(
+//            list
+//        )
+    }
+
+    private suspend fun getValCurs(): ValCurs {
+        return withContext(Dispatchers.Default) {
+            return@withContext CurrencyApi.retrofitService.getValCurs()
+        }
+    }
+
+    private suspend fun getCurrencies(): List<Currency> {
+        return withContext(Dispatchers.Default) {
+            return@withContext CurrencyApi.retrofitService.getCurrencies()
+        }
     }
 }

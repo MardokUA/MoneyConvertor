@@ -60,4 +60,12 @@ dependencies {
 
     // Jetpack Compose Integration
     implementation("androidx.navigation:navigation-compose:2.4.0-alpha10")
+
+    // https://mvnrepository.com/artifact/com.squareup.retrofit2/retrofit
+    implementation group: 'com.squareup.retrofit2', name: 'retrofit', version: '2.9.0'
+
+
+    // https://mvnrepository.com/artifact/com.squareup.retrofit2/converter-simplexml
+    implementation group: 'com.squareup.retrofit2', name: 'converter-simplexml', version: '2.9.0'
+
 }
