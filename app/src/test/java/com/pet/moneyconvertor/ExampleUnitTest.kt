@@ -14,26 +14,14 @@ import org.junit.Assert.*
  */
 class ExampleUnitTest {
     @Test
-    fun addition_isCorrect() = runBlocking {
-
+    fun valCurs_is_get() = runBlocking {
         val valCur = getValCurs()
         assertNotNull(valCur)
-
-//        val list = getCurrencies()
-////        assertNotNull(
-//            list
-//        )
     }
 
     private suspend fun getValCurs(): ValCurs {
         return withContext(Dispatchers.Default) {
             return@withContext CurrencyApi.retrofitService.getValCurs()
-        }
-    }
-
-    private suspend fun getCurrencies(): List<Currency> {
-        return withContext(Dispatchers.Default) {
-            return@withContext CurrencyApi.retrofitService.getCurrencies()
         }
     }
 }
