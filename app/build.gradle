@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id("androidx.navigation.safeargs")
+    id 'kotlin-kapt'
 }
 
 android {
@@ -67,5 +68,13 @@ dependencies {
 
     // https://mvnrepository.com/artifact/com.squareup.retrofit2/converter-simplexml
     implementation group: 'com.squareup.retrofit2', name: 'converter-simplexml', version: '2.9.0'
+
+    // Room dependency
+
+    implementation "androidx.room:room-runtime:$roomVersion"
+    kapt "androidx.room:room-compiler:$roomVersion"
+
+    // optional - Test helpers
+    testImplementation("androidx.room:room-testing:$roomVersion")
 
 }

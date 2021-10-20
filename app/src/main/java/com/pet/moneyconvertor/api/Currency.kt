@@ -1,4 +1,4 @@
-package com.pet.moneyconvertor
+package com.pet.moneyconvertor.api
 
 import org.simpleframework.xml.Attribute
 import org.simpleframework.xml.Element

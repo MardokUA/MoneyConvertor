@@ -1,5 +1,7 @@
 package com.pet.moneyconvertor
 
+import com.pet.moneyconvertor.api.CurrencyApi
+import com.pet.moneyconvertor.api.ValCurs
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext

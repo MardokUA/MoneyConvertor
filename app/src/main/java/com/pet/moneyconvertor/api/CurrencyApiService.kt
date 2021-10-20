@@ -1,4 +1,4 @@
-package com.pet.moneyconvertor
+package com.pet.moneyconvertor.api
 
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
