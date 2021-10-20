@@ -1,6 +1,11 @@
 package com.pet.moneyconvertor.room
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity
 data class CurrencyEntity(
+    @PrimaryKey
     var id: String? = null,
     var numCode: String? = null,
     var charCode: String? = null,

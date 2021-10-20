@@ -1,10 +1,11 @@
 package com.pet.moneyconvertor.room
 
+import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy.REPLACE
-import androidx.room.Query
 import com.pet.moneyconvertor.api.Currency
 
+@Dao
 interface CurrencyDao {
     @Insert(onConflict = REPLACE)
     fun save(currency: CurrencyEntity)
