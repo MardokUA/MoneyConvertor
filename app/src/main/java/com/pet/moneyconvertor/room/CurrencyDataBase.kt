@@ -17,7 +17,7 @@ fun getDatabase(context: Context): CurrencyDataBase {
             INSTANCE = Room.databaseBuilder(
                 context.applicationContext,
                 CurrencyDataBase::class.java,
-                "currenciesDB"
+                "currencies"
             ).build()
         }
     }
