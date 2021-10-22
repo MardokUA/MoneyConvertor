@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">MoneyConvertor</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="button_text">Изменить валюту</string>
+    <string name="button_text">Изменить\nвалюту</string>
     <string name="default_value_edit_number">0.0</string>
-    <string name="input_number_hint">0.0</string>
+    <string name="input_number_hint">Значение</string>
 </resources>
