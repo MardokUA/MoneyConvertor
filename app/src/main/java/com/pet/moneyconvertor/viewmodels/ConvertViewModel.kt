@@ -1,12 +1,11 @@
-package com.pet.moneyconvertor
+package com.pet.moneyconvertor.viewmodels
 
 import android.app.Application
-import android.content.Context
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.pet.moneyconvertor.repository.CurrencyRepository
 import com.pet.moneyconvertor.api.Currency
 import com.pet.moneyconvertor.room.getDatabase
 import kotlinx.coroutines.launch

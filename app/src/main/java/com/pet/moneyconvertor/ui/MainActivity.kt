@@ -1,7 +1,8 @@
-package com.pet.moneyconvertor
+package com.pet.moneyconvertor.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.pet.moneyconvertor.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

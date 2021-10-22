@@ -6,6 +6,8 @@
         <entry key="..\:/Users/Admin/AndroidStudioProjects/MoneyConvertor/app/src/main/res/drawable/launch_screen.xml" value="0.382051282051282" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/MoneyConvertor/app/src/main/res/layout/activity_main.xml" value="0.20885416666666667" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/MoneyConvertor/app/src/main/res/layout/fragment_convert.xml" value="0.19479166666666667" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/MoneyConvertor/app/src/main/res/layout/fragment_currency_list.xml" value="0.2971014492753623" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/MoneyConvertor/app/src/main/res/layout/item_currency.xml" value="0.2971014492753623" />
       </map>
     </option>
   </component>
