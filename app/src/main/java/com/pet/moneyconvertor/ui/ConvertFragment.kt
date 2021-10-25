@@ -1,10 +1,13 @@
 package com.pet.moneyconvertor.ui
 
+import SharedLeftViewModel
+import SharedRightViewModel
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -18,6 +21,10 @@ import timber.log.Timber
 class ConvertFragment : Fragment() {
     private var _binding: FragmentConvertBinding? = null
     private val binding get() = _binding!!
+
+    private val sharedLeftModel: SharedLeftViewModel by activityViewModels()
+    private val sharedRightModel: SharedRightViewModel by activityViewModels()
+
     private val viewModel: ConvertViewModel by lazy {
         val activity = requireNotNull(this.activity) {
         }
@@ -31,25 +38,49 @@ class ConvertFragment : Fragment() {
     ): View? {
         viewModel.fetchCurrencies()
         _binding = FragmentConvertBinding.inflate(layoutInflater, container, false)
+
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
         binding.buttonLeft.setOnClickListener {
-            findNavController().navigate(ConvertFragmentDirections.actionConvertFragmentToCurrencyListFragment())
+            findNavController().navigate(
+                ConvertFragmentDirections.actionConvertFragmentToCurrencyListFragment(
+                    "Left"
+                )
+            )
         }
 
         binding.buttonRight.setOnClickListener {
-            findNavController().navigate(ConvertFragmentDirections.actionConvertFragmentToCurrencyListFragment())
+            findNavController().navigate(
+                ConvertFragmentDirections.actionConvertFragmentToCurrencyListFragment(
+                    "Right"
+                )
+            )
         }
+
+        sharedLeftModel.selected.observe(viewLifecycleOwner, Observer<CurrencyEntity> { currency ->
+            viewModel.setLeftCurrency(currency)
+        })
+        sharedRightModel.selected.observe(viewLifecycleOwner, Observer<CurrencyEntity> { currency ->
+            viewModel.setRightCurrency(currency)
+        })
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        viewModel.currencies.observe(
-            viewLifecycleOwner,
-            Observer<List<CurrencyEntity>> { currencies ->
-                currencies?.apply {
-                    Timber.v(currencies.toString())
-                }
-            })
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        Timber.v("onSaveInstanceState")
+        outState.putString("LeftField", binding.editTextLeftNumber.text.toString())
+        outState.putString("RightField", binding.editTextRightNumber.text.toString())
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        Timber.v("onCreate")
+
+        if (savedInstanceState != null) {
+           //TODO
+        }
     }
 
     override fun onDestroyView() {

@@ -18,5 +18,12 @@
         android:id="@+id/currencyListFragment"
         android:name="com.pet.moneyconvertor.ui.CurrencyListFragment"
         android:label="fragment_currency_list"
-        tools:layout="@layout/fragment_currency_list" />
+        tools:layout="@layout/fragment_currency_list" >
+        <action
+            android:id="@+id/action_currencyListFragment_to_convertFragment"
+            app:destination="@id/convertFragment" />
+        <argument
+            android:name="selectedSide"
+            app:argType="string" />
+    </fragment>
 </navigation>

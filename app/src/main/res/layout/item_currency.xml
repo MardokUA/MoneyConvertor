@@ -13,26 +13,26 @@
 
             <TextView
                 android:id="@+id/textName"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="7"
                 android:text="@{currency.name}"
                 tools:text="Рубль"
                 />
 
             <TextView
                 android:id="@+id/textCharCode"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="2"
                 android:text="@{currency.charCode}"
                 tools:text="RUB"/>
-
-            <CheckBox
-                android:id="@+id/selectState"
-                android:layout_width="wrap_content"
+            <ImageView
+                android:id="@+id/checked"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="CheckBox" />
+                android:src="@drawable/check_mark"
+                />
         </LinearLayout>
 </layout>
