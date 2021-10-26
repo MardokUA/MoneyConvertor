@@ -65,24 +65,6 @@ class ConvertFragment : Fragment() {
         })
         return binding.root
     }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        Timber.v("onSaveInstanceState")
-        outState.putString("LeftField", binding.editTextLeftNumber.text.toString())
-        outState.putString("RightField", binding.editTextRightNumber.text.toString())
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        Timber.v("onCreate")
-
-        if (savedInstanceState != null) {
-           //TODO
-        }
-    }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

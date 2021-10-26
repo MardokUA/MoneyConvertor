@@ -50,7 +50,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:inputType="numberDecimal"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             tools:text="@string/default_value_edit_number"/>
 
         <EditText
@@ -64,7 +63,6 @@
             app:layout_constraintBottom_toTopOf="@+id/textViewRight"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             tools:text="@string/default_value_edit_number"
         />
 
@@ -75,7 +73,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:text="@{viewModel.leftCurrency.charCode}"
+            android:text="@{viewModel.leftCurrency.charCode??`Выберите валюту`}"
             app:layout_constraintBottom_toTopOf="@+id/buttonLeft"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editTextLeftNumber"
@@ -88,7 +86,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
-            android:text="@{viewModel.rightCurrency.charCode}"
+            android:text="@{viewModel.rightCurrency.charCode??`Выберите валюту`}"
             app:layout_constraintBottom_toTopOf="@+id/buttonRight"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editTextRightNumber"
