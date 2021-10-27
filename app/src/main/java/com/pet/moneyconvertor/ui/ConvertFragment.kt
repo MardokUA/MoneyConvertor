@@ -63,6 +63,7 @@ class ConvertFragment : Fragment() {
         sharedRightModel.selected.observe(viewLifecycleOwner, Observer<CurrencyEntity> { currency ->
             viewModel.setRightCurrency(currency)
         })
+
         return binding.root
     }
     override fun onDestroyView() {

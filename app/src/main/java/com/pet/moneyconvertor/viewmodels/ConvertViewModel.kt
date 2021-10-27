@@ -1,6 +1,8 @@
 package com.pet.moneyconvertor.viewmodels
 
 import android.app.Application
+import android.view.View
+import android.widget.EditText
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -12,18 +14,19 @@ import com.pet.moneyconvertor.room.getDatabase
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import timber.log.Timber
+import kotlin.math.roundToInt
 
 class ConvertViewModel(applicationContext: Application) : ViewModel() {
-
-
-
     val leftCurrency : LiveData<CurrencyEntity>
         get() = _leftCurrency
     val rightCurrency : LiveData<CurrencyEntity>
         get() = _rightCurrency
+    val convertResult: LiveData<Double>
+        get() = _convertResult
 
     private val _leftCurrency = MutableLiveData<CurrencyEntity>()
     private val _rightCurrency = MutableLiveData<CurrencyEntity>()
+    private val _convertResult = MutableLiveData<Double>()
     private val dataBase = getDatabase(applicationContext)
     private val repository = CurrencyRepository(dataBase)
 
@@ -48,5 +51,14 @@ class ConvertViewModel(applicationContext: Application) : ViewModel() {
     }
     fun setRightCurrency(currencyEntity: CurrencyEntity) {
         _rightCurrency.value = currencyEntity
+    }
+    fun convert(view: View) {
+        val round = 100.0
+
+        val leftValue = leftCurrency.value?.value
+        val rightValue = rightCurrency.value?.value
+        val valueConvert = ((view as EditText).text).toString().toDouble()
+
+        _convertResult.value = ((valueConvert * leftValue!! / rightValue!!) * round).roundToInt() / round
     }
 }
