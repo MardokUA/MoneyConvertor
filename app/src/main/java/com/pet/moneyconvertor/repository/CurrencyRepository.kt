@@ -8,6 +8,7 @@ import com.pet.moneyconvertor.room.CurrencyDataBase
 import com.pet.moneyconvertor.room.CurrencyEntity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import timber.log.Timber
 
 class CurrencyRepository(private val database: CurrencyDataBase) {
     val currencies:LiveData<List<CurrencyEntity>> = database.currencyDao.loadAll()
@@ -21,5 +22,12 @@ class CurrencyRepository(private val database: CurrencyDataBase) {
             }
             networkCurrencies?.let { database.currencyDao.saveAll(it.asDatabaseModel()) }
         }
+    }
+
+    fun searchCurrency(value: String): LiveData<List<CurrencyEntity>> {
+        Timber.v("value $value")
+        Timber.v("database $database")
+        Timber.v("database.currencyDao ${database.currencyDao}")
+        return database.currencyDao.findByNameOrCharCode(value)
     }
 }

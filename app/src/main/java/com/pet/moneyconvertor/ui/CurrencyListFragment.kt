@@ -3,20 +3,19 @@ package com.pet.moneyconvertor.ui
 import SharedLeftViewModel
 import SharedRightViewModel
 import android.os.Bundle
+import android.view.*
+import android.widget.SearchView
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.pet.moneyconvertor.R
 import com.pet.moneyconvertor.adapters.CurrencyAdapter
 import com.pet.moneyconvertor.databinding.FragmentCurrencyListBinding
 import com.pet.moneyconvertor.viewmodelfactories.CurrencyListViewModelFactory
 import com.pet.moneyconvertor.viewmodels.CurrencyListViewModel
 import timber.log.Timber
-
 
 class CurrencyListFragment : Fragment() {
     private var _binding: FragmentCurrencyListBinding? = null
@@ -41,7 +40,7 @@ class CurrencyListFragment : Fragment() {
         _binding = FragmentCurrencyListBinding.inflate(layoutInflater, container, false)
 
         binding.lifecycleOwner = this
-
+        setHasOptionsMenu(true)
         binding.viewModel = viewModel
         val side = args.selectedSide
         Timber.v(side)
@@ -60,4 +59,19 @@ class CurrencyListFragment : Fragment() {
         _binding = null
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_currency_list, menu)
+        val searchView = menu.findItem(R.id.tool_bar_search).actionView as SearchView
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(p0: String?): Boolean {
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                viewModel.searchCurrency(newText)
+                return false
+            }
+        })
+        super.onCreateOptionsMenu(menu, inflater)
+    }
 }

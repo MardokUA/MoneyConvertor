@@ -17,4 +17,6 @@ interface CurrencyDao {
     @Query("SELECT * FROM currencyEntity")
     fun loadAll(): LiveData<List<CurrencyEntity>>
 
+    @Query("SELECT * FROM currencyEntity WHERE name LIKE :value")
+    fun findByNameOrCharCode(value: String): LiveData<List<CurrencyEntity>>
 }

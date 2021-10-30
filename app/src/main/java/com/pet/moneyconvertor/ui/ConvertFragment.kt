@@ -3,14 +3,13 @@ package com.pet.moneyconvertor.ui
 import SharedLeftViewModel
 import SharedRightViewModel
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.pet.moneyconvertor.R
 import com.pet.moneyconvertor.databinding.FragmentConvertBinding
 import com.pet.moneyconvertor.room.CurrencyEntity
 import com.pet.moneyconvertor.viewmodelfactories.ConvertViewModelFactory
