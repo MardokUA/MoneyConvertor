@@ -52,13 +52,11 @@ class ConvertViewModel(applicationContext: Application) : ViewModel() {
     fun setRightCurrency(currencyEntity: CurrencyEntity) {
         _rightCurrency.value = currencyEntity
     }
-    fun convert(view: View) {
+    fun convert(value: String) {
         val round = 100.0
-
         val leftValue = leftCurrency.value?.value
         val rightValue = rightCurrency.value?.value
-        val valueConvert = ((view as EditText).text).toString().toDouble()
-
+        val valueConvert = value.toDouble()
         _convertResult.value = ((valueConvert * leftValue!! / rightValue!!) * round).roundToInt() / round
     }
 }

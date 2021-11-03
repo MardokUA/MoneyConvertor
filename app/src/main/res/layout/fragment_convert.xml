@@ -25,7 +25,7 @@
             app:layout_constraintEnd_toStartOf="@+id/buttonRight"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextRightNumber" />
+            app:layout_constraintTop_toBottomOf="@+id/textViewResultConvert" />
 
 
         <Button
@@ -40,7 +40,7 @@
             app:layout_constraintStart_toEndOf="@+id/buttonLeft" />
 
         <EditText
-            android:id="@+id/editTextLeftNumber"
+            android:id="@+id/editTextValue"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -54,7 +54,7 @@
             tools:text="@string/default_value_edit_number" />
 
         <TextView
-            android:id="@+id/editTextRightNumber"
+            android:id="@+id/textViewResultConvert"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -77,7 +77,7 @@
             app:layout_constraintEnd_toStartOf="@+id/textViewRight"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextLeftNumber"
+            app:layout_constraintTop_toBottomOf="@+id/editTextValue"
             tools:text="RUB" />
 
         <TextView
@@ -96,8 +96,7 @@
             android:id="@+id/convertButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="@{(view) -> viewModel.convert(editTextLeftNumber)}"
-            app:layout_constraintBottom_toTopOf="@+id/editTextRightNumber"
+            app:layout_constraintBottom_toTopOf="@+id/textViewResultConvert"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"

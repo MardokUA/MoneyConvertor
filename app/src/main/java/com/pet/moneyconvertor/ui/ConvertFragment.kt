@@ -3,6 +3,8 @@ package com.pet.moneyconvertor.ui
 import SharedLeftViewModel
 import SharedRightViewModel
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -60,6 +62,19 @@ class ConvertFragment : Fragment() {
         })
         sharedRightModel.selected.observe(viewLifecycleOwner, Observer<CurrencyEntity> { currency ->
             viewModel.setRightCurrency(currency)
+        })
+
+        binding.editTextValue.addTextChangedListener(object  : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+                viewModel.convert(p0.toString())
+            }
+
         })
 
         return binding.root
