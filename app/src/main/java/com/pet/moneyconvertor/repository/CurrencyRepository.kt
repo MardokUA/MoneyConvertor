@@ -1,6 +1,7 @@
 package com.pet.moneyconvertor.repository
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.pet.moneyconvertor.NetworkCurrencyContainer
 import com.pet.moneyconvertor.api.CurrencyApi
 import com.pet.moneyconvertor.asDatabaseModel
@@ -11,7 +12,8 @@ import kotlinx.coroutines.withContext
 import timber.log.Timber
 
 class CurrencyRepository(private val database: CurrencyDataBase) {
-    val currencies:LiveData<List<CurrencyEntity>> = database.currencyDao.loadAll()
+    val currencies:LiveData<List<CurrencyEntity>> get() = _currencies
+    private val _currencies = MutableLiveData<List<CurrencyEntity>>()
 
     suspend fun refreshCurrency() {
         withContext(Dispatchers.IO) {
@@ -23,11 +25,10 @@ class CurrencyRepository(private val database: CurrencyDataBase) {
             networkCurrencies?.let { database.currencyDao.saveAll(it.asDatabaseModel()) }
         }
     }
-
-    fun searchCurrency(value: String): LiveData<List<CurrencyEntity>> {
-        Timber.v("value $value")
-        Timber.v("database $database")
-        Timber.v("database.currencyDao ${database.currencyDao}")
-        return database.currencyDao.findByNameOrCharCode(value)
+    suspend fun loadAllCurrency() {
+        _currencies.value = database.currencyDao.loadAll()
+    }
+    suspend fun searchCurrency(value: String) {
+        _currencies.value =  database.currencyDao.findByNameOrCharCode(value)
     }
 }

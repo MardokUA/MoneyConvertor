@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/convertFragment"
         android:name="com.pet.moneyconvertor.ui.ConvertFragment"
-        android:label="fragment_convert"
+        android:label="@string/label_convert_fragment"
         tools:layout="@layout/fragment_convert" >
         <action
             android:id="@+id/action_convertFragment_to_currencyListFragment"
@@ -17,7 +17,7 @@
     <fragment
         android:id="@+id/currencyListFragment"
         android:name="com.pet.moneyconvertor.ui.CurrencyListFragment"
-        android:label="fragment_currency_list"
+        android:label="@string/label_currency_list_fragment"
         tools:layout="@layout/fragment_currency_list" >
         <action
             android:id="@+id/action_currencyListFragment_to_convertFragment"

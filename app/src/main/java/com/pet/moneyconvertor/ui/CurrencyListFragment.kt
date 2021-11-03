@@ -7,15 +7,16 @@ import android.view.*
 import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.pet.moneyconvertor.R
 import com.pet.moneyconvertor.adapters.CurrencyAdapter
 import com.pet.moneyconvertor.databinding.FragmentCurrencyListBinding
+import com.pet.moneyconvertor.room.CurrencyEntity
 import com.pet.moneyconvertor.viewmodelfactories.CurrencyListViewModelFactory
 import com.pet.moneyconvertor.viewmodels.CurrencyListViewModel
-import timber.log.Timber
 
 class CurrencyListFragment : Fragment() {
     private var _binding: FragmentCurrencyListBinding? = null
@@ -24,7 +25,7 @@ class CurrencyListFragment : Fragment() {
     private val sharedLeftModel: SharedLeftViewModel by activityViewModels()
     private val sharedRightModel: SharedRightViewModel by activityViewModels()
 
-    val args: CurrencyListFragmentArgs by navArgs()
+    private val args: CurrencyListFragmentArgs by navArgs()
     private val viewModel: CurrencyListViewModel by lazy {
         val activity = requireNotNull(this.activity) {
         }
@@ -36,14 +37,13 @@ class CurrencyListFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentCurrencyListBinding.inflate(layoutInflater, container, false)
 
         binding.lifecycleOwner = this
         setHasOptionsMenu(true)
         binding.viewModel = viewModel
         val side = args.selectedSide
-        Timber.v(side)
         binding.currencyList.adapter = CurrencyAdapter(CurrencyAdapter.OnClickListener {
             item -> when(side) {
                 "Left" -> sharedLeftModel.select(item)
@@ -53,7 +53,6 @@ class CurrencyListFragment : Fragment() {
         })
         return binding.root
     }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
@@ -62,11 +61,13 @@ class CurrencyListFragment : Fragment() {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_currency_list, menu)
         val searchView = menu.findItem(R.id.tool_bar_search).actionView as SearchView
+        searchView.queryHint = getString(R.string.hint_search_view)
+//        searchView.isFocusable = true
+        searchView.isIconified = false
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(p0: String?): Boolean {
                 return true
             }
-
             override fun onQueryTextChange(newText: String): Boolean {
                 viewModel.searchCurrency(newText)
                 return false

@@ -14,13 +14,18 @@ class CurrencyListViewModel(applicationContext: Application) : ViewModel() {
 
     var currencies = repository.currencies
 
+    init {
+        loadAllCurrency()
+    }
     fun searchCurrency(value: String) {
-        val res = repository.searchCurrency(value)
-            currencies= res
-        Timber.v("$value")
-        Timber.v("rep $repository")
+        viewModelScope.launch {
+            repository.searchCurrency(value)
+        }
+    }
 
-        Timber.v("${res.toString()} ${res.value.toString()}")
-        Timber.v("${currencies.toString()} ${currencies.value.toString()}")
+    private fun loadAllCurrency() {
+        viewModelScope.launch {
+            repository.loadAllCurrency()
+        }
     }
 }

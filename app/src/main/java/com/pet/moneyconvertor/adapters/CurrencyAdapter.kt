@@ -15,7 +15,7 @@ class CurrencyAdapter(private val onClickListener: OnClickListener) :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CurrencyViewHolder {
         return CurrencyViewHolder(
             ItemCurrencyBinding.inflate(
-                LayoutInflater.from(parent.context)
+                        LayoutInflater.from(parent.context), parent, false
             )
         )
     }

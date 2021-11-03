@@ -1,7 +1,13 @@
 <resources>
     <string name="app_name">Конвертор валют</string>
-    <string name="toolbar_select_fragment">Выбор валюты</string>
+    <string name="toolbar_select_fragment">Валюта не выбрана</string>
     <string name="button_text">Изменить\nвалюту</string>
     <string name="default_value_edit_number">0.0</string>
     <string name="input_number_hint">Значение</string>
+    <string name="label_convert_fragment">Конвертор валют</string>
+    <string name="label_currency_list_fragment">Выбор валюты</string>
+    <string name="hint_search_view">Поиск</string>
+
+
+
 </resources>

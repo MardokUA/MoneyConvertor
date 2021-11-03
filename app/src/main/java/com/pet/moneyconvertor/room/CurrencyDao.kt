@@ -1,11 +1,9 @@
 package com.pet.moneyconvertor.room
 
-import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy.REPLACE
 import androidx.room.Query
-import com.pet.moneyconvertor.api.Currency
 
 @Dao
 interface CurrencyDao {
@@ -15,8 +13,8 @@ interface CurrencyDao {
     fun saveAll(currencies: List<CurrencyEntity>)
 
     @Query("SELECT * FROM currencyEntity")
-    fun loadAll(): LiveData<List<CurrencyEntity>>
+    suspend fun loadAll(): List<CurrencyEntity>
 
-    @Query("SELECT * FROM currencyEntity WHERE name LIKE :value")
-    fun findByNameOrCharCode(value: String): LiveData<List<CurrencyEntity>>
+    @Query("SELECT * FROM currencyEntity WHERE name LIKE :value || '%' OR charCode LIKE :value || '%'")
+    suspend fun findByNameOrCharCode(value: String): List<CurrencyEntity>
 }

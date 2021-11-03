@@ -1,6 +1,5 @@
 package com.pet.moneyconvertor.api
 
-import com.pet.moneyconvertor.NetworkCurrencyContainer
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.simplexml.SimpleXmlConverterFactory

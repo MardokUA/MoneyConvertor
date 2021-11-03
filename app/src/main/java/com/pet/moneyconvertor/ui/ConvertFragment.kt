@@ -55,7 +55,6 @@ class ConvertFragment : Fragment() {
                 )
             )
         }
-
         sharedLeftModel.selected.observe(viewLifecycleOwner, Observer<CurrencyEntity> { currency ->
             viewModel.setLeftCurrency(currency)
         })
