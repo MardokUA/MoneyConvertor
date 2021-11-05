@@ -45,6 +45,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:hint="@string/input_number_hint"
+            android:enabled="@{viewModel.startInputValue}"
             android:inputType="numberDecimal"
             app:layout_constraintBottom_toTopOf="@+id/textViewLeft"
             app:layout_constraintEnd_toEndOf="parent"

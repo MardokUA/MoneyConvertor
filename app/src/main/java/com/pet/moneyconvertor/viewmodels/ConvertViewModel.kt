@@ -17,6 +17,8 @@ import timber.log.Timber
 import kotlin.math.roundToInt
 
 class ConvertViewModel(applicationContext: Application) : ViewModel() {
+    val startInputValue : LiveData<Boolean>
+        get() = _startInputValue
     val leftCurrency : LiveData<CurrencyEntity>
         get() = _leftCurrency
     val rightCurrency : LiveData<CurrencyEntity>
@@ -29,9 +31,12 @@ class ConvertViewModel(applicationContext: Application) : ViewModel() {
     private val _convertResult = MutableLiveData<Double>()
     private val dataBase = getDatabase(applicationContext)
     private val repository = CurrencyRepository(dataBase)
+    private val _startInputValue = MutableLiveData<Boolean>()
+
 
     init {
         refreshDataFromRepository()
+        _startInputValue.value = false
     }
 
     fun fetchCurrencies() {
@@ -48,15 +53,23 @@ class ConvertViewModel(applicationContext: Application) : ViewModel() {
     }
     fun setLeftCurrency(currencyEntity: CurrencyEntity) {
         _leftCurrency.value = currencyEntity
+        onEnabledInputValue()
     }
     fun setRightCurrency(currencyEntity: CurrencyEntity) {
         _rightCurrency.value = currencyEntity
+        onEnabledInputValue()
     }
     fun convert(value: String) {
-        val round = 100.0
-        val leftValue = leftCurrency.value?.value
-        val rightValue = rightCurrency.value?.value
-        val valueConvert = value.toDouble()
-        _convertResult.value = ((valueConvert * leftValue!! / rightValue!!) * round).roundToInt() / round
+        if (value.isNotEmpty()) {
+            val round = 100.0
+            val leftValue = leftCurrency.value?.value
+            val rightValue = rightCurrency.value?.value
+            val valueConvert = value.toDouble()
+            _convertResult.value = ((valueConvert * leftValue!! / rightValue!!) * round).roundToInt() / round
+        }
     }
+    private fun onEnabledInputValue() {
+        _startInputValue.value = (_leftCurrency.value != null && _rightCurrency.value != null)
+    }
+
 }
