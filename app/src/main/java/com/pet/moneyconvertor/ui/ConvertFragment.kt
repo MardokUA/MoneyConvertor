@@ -6,11 +6,13 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.*
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.pet.moneyconvertor.R
 import com.pet.moneyconvertor.databinding.FragmentConvertBinding
 import com.pet.moneyconvertor.room.CurrencyEntity
 import com.pet.moneyconvertor.viewmodelfactories.ConvertViewModelFactory
@@ -81,6 +83,12 @@ class ConvertFragment : Fragment() {
             }
 
         })
+
+        binding.editTextValue.setOnClickListener {
+            if (viewModel.startInputValue.value != true){
+                Toast.makeText(context, getString(R.string.enabled_toast_message), Toast.LENGTH_SHORT).show()
+            }
+        }
     }
     override fun onDestroyView() {
         super.onDestroyView()

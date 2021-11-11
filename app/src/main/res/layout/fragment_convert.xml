@@ -15,6 +15,20 @@
         android:layout_height="match_parent"
         tools:context=".ui.ConvertFragment">
 
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/contentStart"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="16dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/contentEnd"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="16dp" />
+
         <Button
             android:id="@+id/buttonLeft"
             style="?attr/materialButtonOutlinedStyle"
@@ -23,8 +37,7 @@
             android:text="@string/button_text"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/buttonRight"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@id/contentStart"
             app:layout_constraintTop_toBottomOf="@+id/textViewResultConvert" />
 
 
@@ -35,23 +48,23 @@
             android:layout_height="wrap_content"
             android:text="@string/button_text"
             app:layout_constraintBottom_toBottomOf="@+id/buttonLeft"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintEnd_toStartOf="@id/contentEnd"
             app:layout_constraintStart_toEndOf="@+id/buttonLeft" />
 
         <EditText
             android:id="@+id/editTextValue"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
+            android:focusable="false"
+            android:focusableInTouchMode="@{viewModel.startInputValue}"
             android:gravity="center"
             android:hint="@string/input_number_hint"
-            android:enabled="@{viewModel.startInputValue}"
             android:inputType="numberDecimal"
             app:layout_constraintBottom_toTopOf="@+id/textViewLeft"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/contentEnd"
+            app:layout_constraintStart_toEndOf="@id/contentStart"
             app:layout_constraintTop_toTopOf="parent"
+            android:imeOptions="actionDone"
             tools:text="@string/default_value_edit_number" />
 
         <TextView
@@ -59,12 +72,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:hint="Результат"
             android:text="@{String.valueOf(viewModel.convertResult)}"
             app:layout_constraintBottom_toTopOf="@+id/buttonLeft"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/contentEnd"
+            app:layout_constraintStart_toEndOf="@id/contentStart"
             app:layout_constraintTop_toBottomOf="@+id/convertButton"
             tools:text="@string/default_value_edit_number" />
 
@@ -76,8 +87,7 @@
             android:text="@{viewModel.leftCurrency.charCode??`Выберите валюту`}"
             app:layout_constraintBottom_toTopOf="@+id/convertButton"
             app:layout_constraintEnd_toStartOf="@+id/textViewRight"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@id/contentStart"
             app:layout_constraintTop_toBottomOf="@+id/editTextValue"
             tools:text="RUB" />
 
@@ -88,8 +98,7 @@
             android:gravity="center"
             android:text="@{viewModel.rightCurrency.charCode??`Выберите валюту`}"
             app:layout_constraintBottom_toBottomOf="@+id/textViewLeft"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintEnd_toStartOf="@id/contentEnd"
             app:layout_constraintStart_toEndOf="@+id/textViewLeft"
             tools:text="USD" />
 
@@ -98,9 +107,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toTopOf="@+id/textViewResultConvert"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/contentEnd"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@id/contentStart"
             app:layout_constraintTop_toBottomOf="@+id/textViewLeft"
             app:layout_constraintVertical_bias="0.347"
             app:srcCompat="@drawable/convert_icon" />
