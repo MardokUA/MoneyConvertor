@@ -17,11 +17,11 @@ import timber.log.Timber
 import kotlin.math.roundToInt
 
 class ConvertViewModel(applicationContext: Application) : ViewModel() {
-    val startInputValue : LiveData<Boolean>
+    val startInputValue: LiveData<Boolean>
         get() = _startInputValue
-    val leftCurrency : LiveData<CurrencyEntity>
+    val leftCurrency: LiveData<CurrencyEntity>
         get() = _leftCurrency
-    val rightCurrency : LiveData<CurrencyEntity>
+    val rightCurrency: LiveData<CurrencyEntity>
         get() = _rightCurrency
     val convertResult: LiveData<Double>
         get() = _convertResult
@@ -39,37 +39,42 @@ class ConvertViewModel(applicationContext: Application) : ViewModel() {
         _startInputValue.value = false
     }
 
-    fun fetchCurrencies() {
-
-    }
     private fun refreshDataFromRepository() {
-        try {
-            viewModelScope.launch {
-                repository.refreshCurrency()
-            }
-        } catch (e: HttpException) {
-            Timber.v(e)
+        viewModelScope.launch {
+            repository.refreshCurrency()
         }
     }
+
     fun setLeftCurrency(currencyEntity: CurrencyEntity) {
         _leftCurrency.value = currencyEntity
         onEnabledInputValue()
     }
+
     fun setRightCurrency(currencyEntity: CurrencyEntity) {
         _rightCurrency.value = currencyEntity
         onEnabledInputValue()
     }
+
     fun convert(value: String) {
         if (value.isNotEmpty()) {
             val round = 100.0
             val leftValue = leftCurrency.value?.value
             val rightValue = rightCurrency.value?.value
             val valueConvert = value.toDouble()
-            _convertResult.value = ((valueConvert * leftValue!! / rightValue!!) * round).roundToInt() / round
+            _convertResult.value =
+                ((valueConvert * leftValue!! / rightValue!!) * round).roundToInt() / round
         }
     }
+
     private fun onEnabledInputValue() {
         _startInputValue.value = (_leftCurrency.value != null && _rightCurrency.value != null)
+    }
+
+    fun swapCurrency(value: String) {
+        val temp = _leftCurrency.value
+        _leftCurrency.value = _rightCurrency.value
+        _rightCurrency.value = temp
+        this.convert(value)
     }
 
 }

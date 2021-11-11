@@ -11,12 +11,10 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.pet.moneyconvertor.R
 import com.pet.moneyconvertor.databinding.FragmentConvertBinding
 import com.pet.moneyconvertor.room.CurrencyEntity
 import com.pet.moneyconvertor.viewmodelfactories.ConvertViewModelFactory
 import com.pet.moneyconvertor.viewmodels.ConvertViewModel
-import timber.log.Timber
 
 
 class ConvertFragment : Fragment() {
@@ -37,9 +35,12 @@ class ConvertFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        viewModel.fetchCurrencies()
         _binding = FragmentConvertBinding.inflate(layoutInflater, container, false)
+        return binding.root
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
         binding.buttonLeft.setOnClickListener {
@@ -57,10 +58,14 @@ class ConvertFragment : Fragment() {
                 )
             )
         }
-        sharedLeftModel.selected.observe(viewLifecycleOwner, Observer<CurrencyEntity> { currency ->
+
+        binding.convertButton.setOnClickListener {
+            viewModel.swapCurrency(binding.editTextValue.text.toString())
+        }
+        sharedLeftModel.selected.observe(viewLifecycleOwner, { currency ->
             viewModel.setLeftCurrency(currency)
         })
-        sharedRightModel.selected.observe(viewLifecycleOwner, Observer<CurrencyEntity> { currency ->
+        sharedRightModel.selected.observe(viewLifecycleOwner, { currency ->
             viewModel.setRightCurrency(currency)
         })
 
@@ -76,8 +81,6 @@ class ConvertFragment : Fragment() {
             }
 
         })
-
-        return binding.root
     }
     override fun onDestroyView() {
         super.onDestroyView()

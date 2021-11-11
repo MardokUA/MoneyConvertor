@@ -1,13 +1,15 @@
 package com.pet.moneyconvertor
 
+import android.content.Context
+import androidx.test.core.app.ApplicationProvider
 import com.pet.moneyconvertor.api.CurrencyApi
 import com.pet.moneyconvertor.api.ValCurs
+import com.pet.moneyconvertor.viewmodels.ConvertViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
-import org.junit.Test
-
 import org.junit.Assert.*
+import org.junit.Test
 
 /**
  * Example local unit test, which will execute on the development machine (host).

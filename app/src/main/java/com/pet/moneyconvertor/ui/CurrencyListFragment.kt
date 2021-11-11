@@ -40,19 +40,25 @@ class CurrencyListFragment : Fragment() {
     ): View {
         _binding = FragmentCurrencyListBinding.inflate(layoutInflater, container, false)
 
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         binding.lifecycleOwner = this
         setHasOptionsMenu(true)
         binding.viewModel = viewModel
         val side = args.selectedSide
         binding.currencyList.adapter = CurrencyAdapter(CurrencyAdapter.OnClickListener {
-            item -> when(side) {
-                "Left" -> sharedLeftModel.select(item)
-                "Right" -> sharedRightModel.select(item)
-            }
+                item -> when(side) {
+            "Left" -> sharedLeftModel.select(item)
+            "Right" -> sharedRightModel.select(item)
+        }
             findNavController().navigate(CurrencyListFragmentDirections.actionCurrencyListFragmentToConvertFragment())
         })
-        return binding.root
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
@@ -62,7 +68,6 @@ class CurrencyListFragment : Fragment() {
         inflater.inflate(R.menu.menu_currency_list, menu)
         val searchView = menu.findItem(R.id.tool_bar_search).actionView as SearchView
         searchView.queryHint = getString(R.string.hint_search_view)
-//        searchView.isFocusable = true
         searchView.isIconified = false
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(p0: String?): Boolean {

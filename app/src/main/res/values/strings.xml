@@ -7,7 +7,7 @@
     <string name="label_convert_fragment">Конвертор валют</string>
     <string name="label_currency_list_fragment">Выбор валюты</string>
     <string name="hint_search_view">Поиск</string>
-
+    <string name="search">Search</string>
 
 
 </resources>

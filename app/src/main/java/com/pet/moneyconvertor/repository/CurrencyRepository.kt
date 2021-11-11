@@ -17,12 +17,16 @@ class CurrencyRepository(private val database: CurrencyDataBase) {
 
     suspend fun refreshCurrency() {
         withContext(Dispatchers.IO) {
-            val networkCurrencies = CurrencyApi.retrofitService.getValCurs().valList?.let {
-                NetworkCurrencyContainer(
-                    it
-                )
+            try {
+                val networkCurrencies = CurrencyApi.retrofitService.getValCurs().valList?.let {
+                    NetworkCurrencyContainer(
+                        it
+                    )
+                }
+                networkCurrencies?.let { database.currencyDao.saveAll(it.asDatabaseModel()) }
+            } catch (e: Exception) {
+                Timber.v(e)
             }
-            networkCurrencies?.let { database.currencyDao.saveAll(it.asDatabaseModel()) }
         }
     }
     suspend fun loadAllCurrency() {
