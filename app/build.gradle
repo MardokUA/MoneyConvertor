@@ -91,4 +91,6 @@ dependencies {
     // https://mvnrepository.com/artifact/com.jakewharton.timber/timber
     implementation group: 'com.jakewharton.timber', name: 'timber', version: '5.0.1'
 
+    implementation("androidx.work:work-runtime-ktx:$work_version")
+
 }
