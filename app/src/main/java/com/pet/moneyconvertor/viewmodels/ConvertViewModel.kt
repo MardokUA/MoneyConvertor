@@ -1,19 +1,14 @@
 package com.pet.moneyconvertor.viewmodels
 
 import android.app.Application
-import android.view.View
-import android.widget.EditText
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.pet.moneyconvertor.repository.CurrencyRepository
-import com.pet.moneyconvertor.api.Currency
 import com.pet.moneyconvertor.room.CurrencyEntity
 import com.pet.moneyconvertor.room.getDatabase
 import kotlinx.coroutines.launch
-import retrofit2.HttpException
-import timber.log.Timber
 import kotlin.math.roundToInt
 
 class ConvertViewModel(applicationContext: Application) : ViewModel() {
