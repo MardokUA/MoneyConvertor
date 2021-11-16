@@ -3,9 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/MoneyConvertor/app/src/main/res/drawable/ic_change_currency_24.xml" value="0.20052083333333334" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/MoneyConvertor/app/src/main/res/drawable/launch_screen.xml" value="0.22" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/MoneyConvertor/app/src/main/res/layout/activity_main.xml" value="0.1" />
-        <entry key="..\:/Users/Admin/AndroidStudioProjects/MoneyConvertor/app/src/main/res/layout/fragment_convert.xml" value="0.22" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/MoneyConvertor/app/src/main/res/layout/fragment_convert.xml" value="0.30755864465682015" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/MoneyConvertor/app/src/main/res/layout/fragment_currency_list.xml" value="0.2807017543859649" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/MoneyConvertor/app/src/main/res/layout/item_currency.xml" value="0.22" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/MoneyConvertor/app/src/main/res/layout/toolbar.xml" value="0.10989583333333333" />
