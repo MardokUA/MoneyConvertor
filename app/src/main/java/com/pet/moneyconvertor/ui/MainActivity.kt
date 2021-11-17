@@ -3,7 +3,6 @@ package com.pet.moneyconvertor.ui
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
@@ -12,13 +11,11 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.pet.moneyconvertor.R
 import com.pet.moneyconvertor.databinding.ActivityMainBinding
-import com.pet.moneyconvertor.room.CurrencyDataBase
 import com.pet.moneyconvertor.room.CurrencyEntity
 import com.pet.moneyconvertor.room.getDatabase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
-import timber.log.Timber
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -36,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController = navHostFragment.navController
-        appBarConfiguration = AppBarConfiguration(navController?.graph)
+        appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
 
 
@@ -51,7 +48,7 @@ class MainActivity : AppCompatActivity() {
             runBlocking {
                 saveCurrency()
             }
-            e.commit()
+            e.apply()
         }
 
     }

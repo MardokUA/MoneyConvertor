@@ -1,7 +1,6 @@
 package com.pet.moneyconvertor.ui
 
 
-import androidx.test.core.app.ActivityScenario
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
@@ -16,11 +15,9 @@ import com.pet.moneyconvertor.R
 import com.pet.moneyconvertor.adapters.CurrencyAdapter
 import org.hamcrest.Matchers.`is`
 import org.hamcrest.Matchers.not
-import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import timber.log.Timber
 
 
 @RunWith(AndroidJUnit4::class)

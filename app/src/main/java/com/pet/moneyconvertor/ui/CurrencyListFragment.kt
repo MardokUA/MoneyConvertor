@@ -1,22 +1,20 @@
 package com.pet.moneyconvertor.ui
 
-import SharedLeftViewModel
-import SharedRightViewModel
 import android.os.Bundle
 import android.view.*
 import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.pet.moneyconvertor.R
 import com.pet.moneyconvertor.adapters.CurrencyAdapter
 import com.pet.moneyconvertor.databinding.FragmentCurrencyListBinding
-import com.pet.moneyconvertor.room.CurrencyEntity
 import com.pet.moneyconvertor.viewmodelfactories.CurrencyListViewModelFactory
 import com.pet.moneyconvertor.viewmodels.CurrencyListViewModel
+import com.pet.moneyconvertor.viewmodels.SharedLeftViewModel
+import com.pet.moneyconvertor.viewmodels.SharedRightViewModel
 
 class CurrencyListFragment : Fragment() {
     private var _binding: FragmentCurrencyListBinding? = null
@@ -52,8 +50,8 @@ class CurrencyListFragment : Fragment() {
         val side = args.selectedSide
         binding.currencyList.adapter = CurrencyAdapter(CurrencyAdapter.OnClickListener {
                 item -> when(side) {
-            "Left" -> sharedLeftModel.select(item)
-            "Right" -> sharedRightModel.select(item)
+            getString(R.string.left_button_navigation_key) -> sharedLeftModel.select(item)
+            getString(R.string.right_button_navigation_key) -> sharedRightModel.select(item)
         }
             findNavController().navigate(CurrencyListFragmentDirections.actionCurrencyListFragmentToConvertFragment())
         })

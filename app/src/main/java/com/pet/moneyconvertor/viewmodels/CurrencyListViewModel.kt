@@ -6,7 +6,6 @@ import androidx.lifecycle.viewModelScope
 import com.pet.moneyconvertor.repository.CurrencyRepository
 import com.pet.moneyconvertor.room.getDatabase
 import kotlinx.coroutines.launch
-import timber.log.Timber
 
 class CurrencyListViewModel(applicationContext: Application) : ViewModel() {
     private val database = getDatabase(applicationContext)
