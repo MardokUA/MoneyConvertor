@@ -13,7 +13,7 @@ import timber.log.Timber
 
 // TODO: 25.11.2021 please, guard every _layer entry_ class with interface
 class CurrencyRepository(private val database: CurrencyDataBase) {
-    val currencies:LiveData<List<CurrencyEntity>> get() = _currencies
+    val currencies: LiveData<List<CurrencyEntity>> get() = _currencies
 
     // FIXME: 25.11.2021 avoid to use livedata in _data_ layer. It adds additional complexity to mock it in tests
     private val _currencies = MutableLiveData<List<CurrencyEntity>>()
@@ -29,7 +29,10 @@ class CurrencyRepository(private val database: CurrencyDataBase) {
                 }
                 networkCurrencies?.let { database.currencyDao.saveAll(it.asDatabaseModel()) }
             } catch (e: Exception) {
-                // TODO: 25.11.2021 notify caller or add fallback behaviour. Don't swallow exceptions
+                /*
+                    TODO: 25.11.2021 notify caller or add fallback behaviour. Don't swallow exceptions
+                          Please, read about FailFastStrategy
+                 */
                 Timber.v(e)
             }
         }
@@ -39,7 +42,8 @@ class CurrencyRepository(private val database: CurrencyDataBase) {
     suspend fun loadAllCurrency() {
         _currencies.value = database.currencyDao.loadAll()
     }
+
     suspend fun searchCurrency(value: String) {
-        _currencies.value =  database.currencyDao.findByNameOrCharCode(value)
+        _currencies.value = database.currencyDao.findByNameOrCharCode(value)
     }
 }

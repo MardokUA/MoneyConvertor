@@ -20,7 +20,6 @@ import com.pet.moneyconvertor.viewmodels.SharedRightViewModel
 
 
 class ConvertFragment : Fragment() {
-    // FIXME: 24.11.2021 it's better to use Delegates.notNull()
     private var _binding: FragmentConvertBinding? = null
     private val binding get() = _binding!!
 

@@ -28,7 +28,6 @@ class CurrencyListViewModel(applicationContext: Application) : ViewModel() {
     }
 
     fun searchCurrency(value: String) {
-        // FIXME: 25.11.2021 because error is swallowed in repository, UI will never react on error
         viewModelScope.launch {
             repository.searchCurrency(value)
         }
