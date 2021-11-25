@@ -53,6 +53,7 @@ class CurrencyListFragment : Fragment() {
             getString(R.string.left_button_navigation_key) -> sharedLeftModel.select(item)
             getString(R.string.right_button_navigation_key) -> sharedRightModel.select(item)
         }
+            // TODO: 25.11.2021 couldn't find the arguments creation for this direction
             findNavController().navigate(CurrencyListFragmentDirections.actionCurrencyListFragmentToConvertFragment())
         })
     }

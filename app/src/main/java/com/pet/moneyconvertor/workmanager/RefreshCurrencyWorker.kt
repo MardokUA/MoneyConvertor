@@ -21,6 +21,7 @@ class RefreshCurrencyWorker(appContext: Context, workerParams: WorkerParameters)
         try {
             repository.refreshCurrency()
         } catch (e: HttpException) {
+            // FIXME: 25.11.2021 you'll never catch the exception because you swallowed it in repository
             return Result.retry()
         }
         return Result.success()

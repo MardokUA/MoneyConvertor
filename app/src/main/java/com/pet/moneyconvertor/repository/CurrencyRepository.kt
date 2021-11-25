@@ -11,10 +11,14 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import timber.log.Timber
 
+// TODO: 25.11.2021 please, guard every _layer entry_ class with interface
 class CurrencyRepository(private val database: CurrencyDataBase) {
     val currencies:LiveData<List<CurrencyEntity>> get() = _currencies
+
+    // FIXME: 25.11.2021 avoid to use livedata in _data_ layer. It adds additional complexity to mock it in tests
     private val _currencies = MutableLiveData<List<CurrencyEntity>>()
 
+    // FIXME: 25.11.2021 only UI should manipulate with particular dispatcher
     suspend fun refreshCurrency() {
         withContext(Dispatchers.IO) {
             try {
@@ -25,10 +29,13 @@ class CurrencyRepository(private val database: CurrencyDataBase) {
                 }
                 networkCurrencies?.let { database.currencyDao.saveAll(it.asDatabaseModel()) }
             } catch (e: Exception) {
+                // TODO: 25.11.2021 notify caller or add fallback behaviour. Don't swallow exceptions
                 Timber.v(e)
             }
         }
     }
+
+    // FIXME: 25.11.2021 are you sure this function will be called in main thread only?
     suspend fun loadAllCurrency() {
         _currencies.value = database.currencyDao.loadAll()
     }

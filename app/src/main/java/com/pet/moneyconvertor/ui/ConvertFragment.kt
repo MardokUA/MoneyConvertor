@@ -20,14 +20,22 @@ import com.pet.moneyconvertor.viewmodels.SharedRightViewModel
 
 
 class ConvertFragment : Fragment() {
+    // FIXME: 24.11.2021 it's better to use Delegates.notNull()
     private var _binding: FragmentConvertBinding? = null
     private val binding get() = _binding!!
 
+    /*
+     FIXME: 25.11.2021 one viewModel per ui component. If you need to share data between two or more fragments,
+          you have two opportunities to achieve that:
+          - the same ONE view model instead TWO ones;
+          - use your repository. For example, you could have some InMemoryStorage in it.
+     */
     private val sharedLeftModel: SharedLeftViewModel by activityViewModels()
     private val sharedRightModel: SharedRightViewModel by activityViewModels()
 
     private val viewModel: ConvertViewModel by lazy {
         val activity = requireNotNull(this.activity) {
+            // FIXME: 25.11.2021 swallowed message
         }
         ViewModelProvider(this, ConvertViewModelFactory(activity.application))
             .get(ConvertViewModel::class.java)
@@ -70,8 +78,8 @@ class ConvertFragment : Fragment() {
         sharedRightModel.selected.observe(viewLifecycleOwner, { currency ->
             viewModel.setRightCurrency(currency)
         })
-
-        binding.editTextValue.addTextChangedListener(object  : TextWatcher {
+        // TODO: 25.11.2021 it's better to write extension and hide all the boilerplate code
+        binding.editTextValue.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
 
@@ -85,11 +93,17 @@ class ConvertFragment : Fragment() {
         })
 
         binding.editTextValue.setOnClickListener {
-            if (viewModel.startInputValue.value != true){
-                Toast.makeText(context, getString(R.string.enabled_toast_message), Toast.LENGTH_SHORT).show()
+            // FIXME: 25.11.2021 never ask, just tell principle
+            if (viewModel.startInputValue.value != true) {
+                Toast.makeText(
+                    context,
+                    getString(R.string.enabled_toast_message),
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

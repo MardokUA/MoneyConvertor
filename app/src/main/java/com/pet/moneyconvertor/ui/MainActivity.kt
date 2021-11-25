@@ -18,6 +18,10 @@ import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 
 class MainActivity : AppCompatActivity() {
+    /*
+     TODO: 24.11.2021 prefer Delegates.notNull() to lateinit
+           Please, take a look at <a href="https://www.youtube.com/watch?v=0nXXUzMyF8c">link</a>
+     */
     private lateinit var binding: ActivityMainBinding
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var rubleCurrency: CurrencyEntity
@@ -26,8 +30,7 @@ class MainActivity : AppCompatActivity() {
         setTheme(R.style.Theme_MoneyConvertor)
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-        val view = binding.root
-        setContentView(view)
+        setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
 
         val navHostFragment =
@@ -36,7 +39,10 @@ class MainActivity : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
 
-
+        /*
+        TODO: 25.11.2021 all this logic should be in viewModel. Seems to me, you didn't
+               find a way to obtain context in the viewModel
+         */
         val sp: SharedPreferences = getSharedPreferences(
             getString(R.string.preference_file_key), Context.MODE_PRIVATE
         )
@@ -45,12 +51,12 @@ class MainActivity : AppCompatActivity() {
         if (!notAddRuble) {
             val e: SharedPreferences.Editor = sp.edit()
             e.putBoolean(getString(R.string.add_ruble_key), true)
+            // FIXME: 25.11.2021 why run blocking?
             runBlocking {
                 saveCurrency()
             }
             e.apply()
         }
-
     }
 
     private suspend fun saveCurrency() {

@@ -8,13 +8,18 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import org.junit.After
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.junit.Assert.assertEquals
 import java.io.IOException
-import kotlin.jvm.Throws
 
+/*
+   TODO: 25.11.2021 there is no sense to test library logic.
+         When you have sufficient amount of business logic tests, it's very
+         easy to define that something wrong with data base declaration in DAO.
+         Although, you have runtime validation of your queries.
+ */
 @RunWith(AndroidJUnit4::class)
 class RoomDatabaseTest {
     private lateinit var currencyDao: CurrencyDao
@@ -136,7 +141,7 @@ class RoomDatabaseTest {
     }
 
     @Test
-     fun saveAndLoadOneCurrency() = runBlocking {
+    fun saveAndLoadOneCurrency() = runBlocking {
         currency?.let { currencyDao.save(it) }
         val actual = getAllCurrency()
         assertEquals(currency, actual[0])
@@ -146,7 +151,7 @@ class RoomDatabaseTest {
     fun saveListCurrencyWithRepeatElements() = runBlocking {
         currencyDao.saveAll(currencyListWithRepeatCurrency)
         val actual = getAllCurrency()
-        assertEquals( currencyList, actual.sortedBy { it.id })
+        assertEquals(currencyList, actual.sortedBy { it.id })
     }
 
 
@@ -176,6 +181,7 @@ class RoomDatabaseTest {
             return@withContext currencyDao.loadAll()
         }
     }
+
     private suspend fun findByValue(value: String): List<CurrencyEntity> {
         return withContext(Dispatchers.Default) {
             return@withContext currencyDao.findByNameOrCharCode(value)

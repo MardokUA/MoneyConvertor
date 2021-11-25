@@ -13,6 +13,11 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
+/*
+   TODO: 25.11.2021 it looks like you tried to write tests on business logic.
+        But because you don't have domain layer at all, you was forced to write
+        this tests in android package.
+ */
 @RunWith(AndroidJUnit4::class)
 class ConvertViewModelTest {
     @get:Rule
